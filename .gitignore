@@ -1,0 +1,12 @@
+instructions/ai_instruction_kits/
+.openhands/
+.claude/
+
+# Git worktree directories
+.gitworktrees/
+gitworktrees/
+
+# 開発対象プロジェクト (projects/内のすべてを無視)
+projects/*
+# ただし.gitkeepは追跡する
+!projects/.gitkeep
