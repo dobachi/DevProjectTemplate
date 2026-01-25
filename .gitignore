@@ -11,3 +11,4 @@ projects/*
 # ただし.gitkeepは追跡する
 !projects/.gitkeep
 .gemini/
+.codex/
