@@ -1,6 +1,8 @@
 instructions/ai_instruction_kits/
 .openhands/
-.claude/
+.claude/*
+!.claude/skills/
+!.claude/settings.json
 
 # Git worktree directories
 .gitworktrees/
