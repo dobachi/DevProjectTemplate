@@ -18,6 +18,10 @@ DevProjectTemplate/        # This wrapper project (AI support environment)
 ## Using the AI Instruction System
 Please load `instructions/ai_instruction_kits/instructions/en/system/ROOT_INSTRUCTION.md` when starting a task.
 
+ROOT_INSTRUCTION.md acts as a skill orchestrator. Check installed skills in `.claude/skills/` and use them according to the task at hand.
+
+Additional skills are available from the [AI Instruction Kits Marketplace](https://github.com/dobachi/AI_Instruction_Kits).
+
 ## Project Settings
 - Language: English (en)
 - Project Type: Wrapper Project (supporting multiple project development)
