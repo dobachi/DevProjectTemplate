@@ -25,14 +25,11 @@ ROOT_INSTRUCTION.mdはスキルオーケストレーターです。`.claude/skil
 ## プロジェクト設定
 - 言語: 日本語 (ja)
 - プロジェクトタイプ: ラッパープロジェクト（複数プロジェクトの開発支援）
-- チェックポイント管理: 有効
-- チェックポイントスクリプト: scripts/checkpoint.sh
-- ログファイル: checkpoint.log
+- タスク管理・進捗追跡・worktree・ビルドはAIツールのネイティブ機能を利用
 
 ## 重要なパス
 - **開発対象プロジェクト**: `projects/` 配下
 - AI指示書システム: `instructions/ai_instruction_kits/`
-- チェックポイントスクリプト: `scripts/checkpoint.sh`
 - プロジェクト管理スクリプト: `scripts/project-manager.sh`
 - プロジェクト固有の設定: このファイル（`instructions/PROJECT.md`）
 
@@ -69,15 +66,12 @@ bash scripts/project-manager.sh remove <project-name>
 ```bash
 # プロジェクトをclone
 bash scripts/project-manager.sh add https://github.com/user/repo.git my-project
-
-# タスク開始
-bash scripts/checkpoint.sh start "機能開発" 3
 ```
 
 ### 2. 開発作業
 - `projects/<project-name>` 配下で開発
 - AI指示書システムを活用してタスクを遂行
-- 必要に応じてworktreeを作成
+- タスク管理・進捗追跡・worktreeはAIツールのネイティブ機能を利用
 
 ### 3. コミット
 ```bash
@@ -89,11 +83,6 @@ cd projects/my-project
 git commit -m "メッセージ"
 ```
 
-### 4. タスク完了
-```bash
-bash scripts/checkpoint.sh complete <task-id> "完了メッセージ"
-```
-
 ## コミットルール
 - **ラッパープロジェクト**: `bash scripts/commit.sh "メッセージ"` 推奨
 - **開発対象プロジェクト**: 各プロジェクトのルールに従う
@@ -102,7 +91,7 @@ bash scripts/checkpoint.sh complete <task-id> "完了メッセージ"
 ## 複数プロジェクトの扱い
 - 各プロジェクトは独立して管理
 - タスクごとに適切な指示書を選択
-- チェックポイントでどのプロジェクトの作業か記録推奨
+- どのプロジェクトの作業かはAIツールのタスク管理機能で記録推奨
 
 ## プロジェクト固有の追加指示
 <!-- 開発対象プロジェクトの特性に応じて追加してください -->

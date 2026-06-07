@@ -11,8 +11,7 @@ AI支援開発のためのラッパープロジェクトテンプレート
 
 - **AI指示書システム統合**: タスクに応じた専門的な指示書を選択・使用
 - **プロジェクト分離**: `projects/` 配下で複数プロジェクトを並行管理
-- **チェックポイント管理**: タスク進捗を追跡・記録
-- **Worktree対応**: 複雑なタスクは専用ブランチで作業可能
+- **AIツールのネイティブ機能を利用**: タスク管理・進捗追跡・worktree・ビルドはAIツールのネイティブ機能を利用
 - **安全なコミット**: AI署名を自動除去するコミットスクリプト
 
 ## ディレクトリ構造
@@ -26,9 +25,7 @@ DevProjectTemplate/
 │   ├── PROJECT.md         # プロジェクト固有の指示
 │   └── PROJECT.en.md
 ├── scripts/               # 各種スクリプト
-│   ├── checkpoint.sh      # チェックポイント管理
 │   ├── commit.sh          # 安全なコミット
-│   ├── worktree-manager.sh # worktree管理
 │   └── project-manager.sh # プロジェクト管理
 ├── CLAUDE.md              # Claude Code用設定 → instructions/PROJECT.md
 ├── CURSOR.md              # Cursor用設定 → instructions/PROJECT.md
@@ -60,13 +57,9 @@ cd projects/my-project
 ```bash
 # ラッパープロジェクトのルートで実行
 cd ../../
-
-# チェックポイント確認
-bash scripts/checkpoint.sh pending
-
-# 新規タスクの開始
-bash scripts/checkpoint.sh start "機能開発" 5
 ```
+
+タスク管理・進捗追跡・worktree・ビルドはAIツールのネイティブ機能を利用してください。
 
 ## 使い方
 
@@ -89,10 +82,7 @@ bash scripts/project-manager.sh status <project-name>
 ### AI開発支援の利用
 
 1. **タスク開始**
-```bash
-bash scripts/checkpoint.sh start "認証機能の実装" 3
-# → タスクID: TASK-123456-abc が生成されます
-```
+   - タスク管理・進捗追跡はAIツールのネイティブ機能を利用
 
 2. **AI指示書の選択**
    - Claude Code等のAIツールを起動
@@ -102,6 +92,7 @@ bash scripts/checkpoint.sh start "認証機能の実装" 3
 3. **開発実施**
    - `projects/my-project` 配下で開発作業
    - AIの支援を受けながら実装
+   - 複雑なタスクや複数ファイルの変更時は、AIツールのworktree機能を利用
 
 4. **コミット**
 ```bash
@@ -111,26 +102,6 @@ bash scripts/commit.sh "feat: ログイン機能を実装"
 # 対象プロジェクトのディレクトリで通常のgit commit も使用可能
 cd projects/my-project
 git commit -m "fix: バリデーションエラーを修正"
-```
-
-5. **タスク完了**
-```bash
-bash scripts/checkpoint.sh complete TASK-123456-abc "認証機能実装完了"
-```
-
-### Worktreeの活用
-
-複雑なタスクや複数ファイルの変更時は、専用のworktreeで作業：
-
-```bash
-# worktree作成
-bash scripts/worktree-manager.sh create TASK-123456-abc "feature-auth"
-cd .gitworktrees/ai-TASK-123456-abc-feature-auth/projects/my-project
-
-# 作業実施...
-
-# 完了後
-bash scripts/worktree-manager.sh complete TASK-123456-abc
 ```
 
 ## プロジェクト固有の設定
@@ -167,11 +138,6 @@ projects/
 
 それぞれのプロジェクトは独立して管理され、タスクごとに適切な指示書を使用できます。
 
-## チェックポイントとログ
-
-- **チェックポイントログ**: `checkpoint.log` にタスクの進捗が記録されます
-- **履歴確認**: `bash scripts/checkpoint.sh log` で履歴を確認
-
 ## トラブルシューティング
 
 ### AI署名付きコミットが拒否される
@@ -185,9 +151,9 @@ projects/
 git submodule update --init --recursive
 ```
 
-### チェックポイントが記録されない
+### スクリプトが実行できない
 
-`scripts/checkpoint.sh` に実行権限があるか確認：
+`scripts/` 配下のスクリプトに実行権限があるか確認：
 
 ```bash
 chmod +x scripts/*.sh

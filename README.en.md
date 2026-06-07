@@ -11,8 +11,7 @@ You can clone target projects into the `projects/` directory and develop them wh
 
 - **AI Instruction System Integration**: Select and use specialized instructions based on tasks
 - **Project Isolation**: Manage multiple projects in parallel under `projects/`
-- **Checkpoint Management**: Track and record task progress
-- **Worktree Support**: Work on complex tasks in dedicated branches
+- **Native AI Tool Features**: Use your AI tool's native features for task management, progress tracking, worktrees, and builds
 - **Safe Commits**: Commit script that automatically removes AI signatures
 
 ## Directory Structure
@@ -26,9 +25,7 @@ DevProjectTemplate/
 │   ├── PROJECT.md         # Project-specific instructions
 │   └── PROJECT.en.md
 ├── scripts/               # Various scripts
-│   ├── checkpoint.sh      # Checkpoint management
 │   ├── commit.sh          # Safe commit
-│   ├── worktree-manager.sh # Worktree management
 │   └── project-manager.sh # Project management
 ├── CLAUDE.md              # Claude Code config → instructions/PROJECT.md
 ├── CURSOR.md              # Cursor config → instructions/PROJECT.md
@@ -60,13 +57,9 @@ cd projects/my-project
 ```bash
 # Execute at wrapper project root
 cd ../../
-
-# Check checkpoint
-bash scripts/checkpoint.sh pending
-
-# Start new task
-bash scripts/checkpoint.sh start "Feature Development" 5
 ```
+
+Use your AI tool's native features for task management, progress tracking, worktrees, and builds.
 
 ## Usage
 
@@ -89,10 +82,7 @@ bash scripts/project-manager.sh status <project-name>
 ### AI Development Support
 
 1. **Start Task**
-```bash
-bash scripts/checkpoint.sh start "Implement Authentication" 3
-# → Task ID: TASK-123456-abc will be generated
-```
+   - Use your AI tool's native features for task management and progress tracking
 
 2. **Select AI Instruction**
    - Launch AI tool like Claude Code
@@ -102,6 +92,7 @@ bash scripts/checkpoint.sh start "Implement Authentication" 3
 3. **Development**
    - Work under `projects/my-project`
    - Implement with AI assistance
+   - For complex tasks or multi-file changes, use your AI tool's worktree feature
 
 4. **Commit**
 ```bash
@@ -111,26 +102,6 @@ bash scripts/commit.sh "feat: implement login functionality"
 # Normal git commit is also available in target project directory
 cd projects/my-project
 git commit -m "fix: validation error"
-```
-
-5. **Complete Task**
-```bash
-bash scripts/checkpoint.sh complete TASK-123456-abc "Authentication feature completed"
-```
-
-### Utilizing Worktree
-
-For complex tasks or multi-file changes, work in a dedicated worktree:
-
-```bash
-# Create worktree
-bash scripts/worktree-manager.sh create TASK-123456-abc "feature-auth"
-cd .gitworktrees/ai-TASK-123456-abc-feature-auth/projects/my-project
-
-# Work...
-
-# After completion
-bash scripts/worktree-manager.sh complete TASK-123456-abc
 ```
 
 ## Project-Specific Configuration
@@ -167,11 +138,6 @@ projects/
 
 Each project is managed independently and can use appropriate instructions per task.
 
-## Checkpoints and Logs
-
-- **Checkpoint Log**: Task progress is recorded in `checkpoint.log`
-- **View History**: Check history with `bash scripts/checkpoint.sh log`
-
 ## Troubleshooting
 
 ### AI Signature Commits Are Rejected
@@ -185,9 +151,9 @@ Use `scripts/commit.sh` or manually remove AI signatures from commit messages.
 git submodule update --init --recursive
 ```
 
-### Checkpoints Not Recorded
+### Scripts Cannot Be Executed
 
-Check if `scripts/checkpoint.sh` has execute permission:
+Check if scripts under `scripts/` have execute permission:
 
 ```bash
 chmod +x scripts/*.sh

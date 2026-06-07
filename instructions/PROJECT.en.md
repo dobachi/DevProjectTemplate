@@ -25,14 +25,11 @@ Additional skills are available from the [AI Instruction Kits Marketplace](https
 ## Project Settings
 - Language: English (en)
 - Project Type: Wrapper Project (supporting multiple project development)
-- Checkpoint Management: Enabled
-- Checkpoint Script: scripts/checkpoint.sh
-- Log File: checkpoint.log
+- Use your AI tool's native features for task management, progress tracking, worktrees, and builds.
 
 ## Important Paths
 - **Development Target Projects**: Under `projects/`
 - AI Instruction System: `instructions/ai_instruction_kits/`
-- Checkpoint Script: `scripts/checkpoint.sh`
 - Project Management Script: `scripts/project-manager.sh`
 - Project-Specific Configuration: This file (`instructions/PROJECT.en.md`)
 
@@ -69,15 +66,12 @@ bash scripts/project-manager.sh remove <project-name>
 ```bash
 # Clone project
 bash scripts/project-manager.sh add https://github.com/user/repo.git my-project
-
-# Start task
-bash scripts/checkpoint.sh start "Feature Development" 3
 ```
 
 ### 2. Development Work
 - Develop under `projects/<project-name>`
 - Accomplish tasks using the AI instruction system
-- Create worktree if needed
+- Use your AI tool's native features for task management, progress tracking, and worktrees.
 
 ### 3. Commit
 ```bash
@@ -89,11 +83,6 @@ cd projects/my-project
 git commit -m "message"
 ```
 
-### 4. Complete Task
-```bash
-bash scripts/checkpoint.sh complete <task-id> "completion message"
-```
-
 ## Commit Rules
 - **Wrapper Project**: `bash scripts/commit.sh "message"` recommended
 - **Development Target Project**: Follow each project's rules
@@ -102,7 +91,7 @@ bash scripts/checkpoint.sh complete <task-id> "completion message"
 ## Handling Multiple Projects
 - Each project is managed independently
 - Select appropriate instructions per task
-- Recommended to record which project in checkpoint
+- Recommended to record which project you are working on using your AI tool's task management feature
 
 ## Project-Specific Instructions
 <!-- Add instructions according to development target project characteristics -->
