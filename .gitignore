@@ -14,3 +14,4 @@ projects/*
 !projects/.gitkeep
 .gemini/
 .codex/
+.claude/
